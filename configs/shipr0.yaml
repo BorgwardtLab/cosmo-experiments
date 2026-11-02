@@ -1,0 +1,7 @@
+name: shipr0
+benchmark: B_SHIPR0
+transforms:
+  - TokenizeAtoms:
+      alphabet: [M, N]
+  - OneHotAtomFeatures:
+      alphabet: [M, N]

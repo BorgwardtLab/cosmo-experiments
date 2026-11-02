@@ -1,0 +1,2 @@
+arch: egnn
+hidden_dim: 256

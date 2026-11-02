@@ -1,0 +1,3 @@
+arch: cosmo
+filter: kernel_point_triton
+hidden_dim: 64

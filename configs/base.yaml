@@ -1,0 +1,91 @@
+seed: 42
+arch: gnn
+hidden_dim: 128
+num_layers: 4
+learning_rate: 0.0003
+filter: neural_field
+pool: mean
+cosmo_pool: max
+head: identity
+activation: null
+field_channels: 32
+field_layers: 3
+field_dropout: 0.0
+attribute: false
+minimum_angle: 0.0
+ig_steps: 32
+node_dropout: 0.0
+weight_decay: 0.00005
+kernel_radii: null
+kernel_diagonals: false
+split_readout: null
+ligand_feature_offset: 0
+egnn_style: toy
+protein_pool: mean
+softmax_temperature: 1.0
+mask_ligand_features: false
+pl_radius: 0.0
+cosmo_pool_to: node
+gnn_style: plain
+kpconv_residual: false
+kpconv_style: nearest
+se3_zero_radial: true
+globals:
+  workers: 1
+trainer:
+  backend: TorchBackend
+  root: results/${name}
+  logger: DiskLogger
+  validate_every: 1.0
+  epochs: 100
+  accelerator: gpu
+  devices: 1
+  workers: 1
+  precision: 32
+  strategy: auto
+  accumulate_gradients: 1
+  checkpoint_every: 1
+  clip_grad_norm: 0.5
+  batch_size: ${batch_size}
+  batch_on: ${batch_on}
+  random_seed: ${seed}
+model:
+  .models.torch.Model:
+    arch: ${arch}
+    node_level: ${node_level}
+    in_channels: ${in_channels}
+    out_channels: ${out_channels}
+    loss: ${loss}
+    learning_rate: ${learning_rate}
+    resolution: ${resolution}
+    hidden_dim: ${hidden_dim}
+    num_layers: ${num_layers}
+    radius: ${radius}
+    dim: ${dim}
+    filter: ${filter}
+    pool: ${pool}
+    cosmo_pool: ${cosmo_pool}
+    head: ${head}
+    activation: ${activation}
+    field_channels: ${field_channels}
+    field_layers: ${field_layers}
+    field_dropout: ${field_dropout}
+    attribute: ${attribute}
+    minimum_angle: ${minimum_angle}
+    ig_steps: ${ig_steps}
+    node_dropout: ${node_dropout}
+    weight_decay: ${weight_decay}
+    kernel_radii: ${kernel_radii}
+    kernel_diagonals: ${kernel_diagonals}
+    split_readout: ${split_readout}
+    ligand_feature_offset: ${ligand_feature_offset}
+    egnn_style: ${egnn_style}
+    protein_pool: ${protein_pool}
+    softmax_temperature: ${softmax_temperature}
+    mask_ligand_features: ${mask_ligand_features}
+    pl_radius: ${pl_radius}
+    cosmo_pool_to: ${cosmo_pool_to}
+    gnn_style: ${gnn_style}
+    kpconv_residual: ${kpconv_residual}
+    kpconv_style: ${kpconv_style}
+    se3_zero_radial: ${se3_zero_radial}

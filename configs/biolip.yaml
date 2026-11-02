@@ -1,0 +1,49 @@
+name: biolip
+batch_size: 32
+batch_on: molecules
+in_channels: 46
+out_channels: 1
+loss: l1_loss
+node_level: false
+resolution: residue
+dim: 3
+radius: 10.0
+knn_k: 6
+pl_radius: 8.0
+kernel_radii: [1.5, 4.5, 8.0]
+kernel_diagonals: true
+split_readout: protein_only
+ligand_feature_offset: 21
+mask_ligand_features: true
+protein_pool: max
+softmax_temperature: 0.2
+cosmo_pool: max
+cosmo_pool_to: node
+gnn_style: residual
+kpconv_residual: true
+se3_zero_radial: false
+egnn_style: standard
+benchmark:
+  name: B_BIOLIP
+  dataset: D_BIOLIP
+  sampler: MoleculeSampler
+  task:
+    PropertyPredictionTask:
+      property: pkd
+      resolution: residue
+  metric:
+    - MeanAbsoluteErrorMetric
+    - SpearmansRhoMetric
+trainer:
+  epochs: 50
+  checkpoint_metric: Spearman
+  clip_grad_norm: 0.5
+transforms:
+  - ExplodeLigandAtoms:
+  - ResiduePositions:
+  - TokenizeByChainType:
+  - Standardize:
+      field: molecule_pkd
+  - KnnGraph:
+      k: ${knn_k}
+      resolution: residue

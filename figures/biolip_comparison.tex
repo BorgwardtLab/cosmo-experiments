@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\caption{Protein--ligand binding affinity and site attribution on D\_BIOLIP. MAE is mean absolute error on pKd ($-\log_{10}$ Kd). Spearman $\rho$ is the rank correlation between predicted and true pKd. AUROC and AUPRC rank $|$attribution$|$ on protein residues (chain mask) against BioLiP contact residues. Recall is the fraction of the $n_{\mathrm{site}}$ highest-scoring residues that are contacts. $\rho$, AUROC, AUPRC, and Recall are percentages. Ligand atom identities are collapsed to one token (coordinates kept). All models max-pool protein residues (ligand masked at readout). Cosmo max-pools lifted frames onto nodes first. Graphs are residue $k$NN with $k=6$ plus all protein--ligand pairs within $8$\,\AA{}; batch size 32 complexes; 50 epochs. Cosmo and KPConv use kernel shells $[1.5, 4.5, 8.0]$ and hidden 64; EGNN uses hidden 256 and SE3T hidden 512. KPConv uses nearest-kernel assignment (KPConvX). Baselines and Cosmo IG use integrated gradients on node features (coordinates held fixed). All models trained with matched batch size, epochs, and depth.}
+\label{tab:biolip_comparison}
+\begin{tabular}{lccccc}
+\toprule
+Model & MAE (pKd) & Spearman $\rho$ (\%) & AUROC (\%) & AUPRC (\%) & Recall (\%) \\
+\midrule
+Cosmo & 0.75 & 84.1 & 75.7 & 45.1 & 47.9 \\
+Cosmo IG & 0.75 & 84.1 & 93.4 & 47.6 & 43.1 \\
+KPConv & 1.26 & 56.7 & 58.4 & 6.2 & 2.1 \\
+GNN & 1.00 & 76.2 & 51.2 & 5.8 & 2.3 \\
+EGNN & 0.98 & 71.0 & 74.7 & 17.1 & 16.3 \\
+SE3T & 0.97 & 72.5 & 65.6 & 9.8 & 7.4 \\
+\bottomrule
+\end{tabular}
+\end{table}

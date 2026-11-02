@@ -1,0 +1,15 @@
+{
+  "name": "cosmo-experiments",
+  "version": "1.0.0",
+  "description": "Experiment repository for validating the equivariant **Cosmo** architecture ([cosmic-torch](https://github.com/...)) on Bioverse benchmarks. Structure mirrors [bioverse_experiments](../bioverse_experiments).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "molstar": "^5.6.1"
+  }
+}

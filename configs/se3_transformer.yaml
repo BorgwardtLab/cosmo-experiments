@@ -1,0 +1,3 @@
+arch: se3_transformer
+hidden_dim: 512
+se3_zero_radial: false

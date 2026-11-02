@@ -1,8 +1,0 @@
-bioverse-ml
-cosmic-torch
-torch-geometric
-scipy
-plotly
-rdkit
-lightning
-comet-ml

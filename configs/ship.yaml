@@ -1,0 +1,27 @@
+name: ship00
+hidden_dim: 128
+batch_size: 64
+batch_on: molecules
+in_channels: 2
+out_channels: 1
+loss: binary_cross_entropy_with_logits
+node_level: false
+resolution: atom
+dim: 2
+radius: 0.75
+# Shared Cosmo / KPConv nearest-kernel points (origin + 8 dirs at r/2 and r).
+# Cosmo applies them in local frames; KPConv uses the same points globally.
+kernel_radii: [0.375, 0.75]
+kernel_diagonals: true
+benchmark: B_SHIP00
+trainer:
+  checkpoint_metric: Accuracy
+transforms:
+  - TokenizeAtoms:
+      alphabet: [M, N]
+  - OneHotAtomFeatures:
+      alphabet: [M, N]
+  - SceneSplit:
+      train_size: 0.8
+      val_size: 0.1
+      test_size: 0.1
